@@ -4,7 +4,7 @@ This repo is part of a duedil data engineer assignment, whose problem statement 
  
  
 ## Prerequisites
-Following should be installed on the system- 
+Following software should be installed on the system and their locations should be inlcuded in the system PATH - 
 1. Oracle Java 1.8 
 2. Apache Spark
 3. Apache Maven
@@ -25,5 +25,12 @@ Test data is present in the resource directory under src/main. Run the following
  
  `spark-submit --class "testing.TestDriver" --master local[4] path/to/test_input path/to/expected_output1 path/to/expected_output2 path/to/expected_output3`
  
- ##Authors
+## Authors
  Harshit Jain
+
+## Acknowledgement
+- Apache Spark Official Documentation (https://spark.apache.org/docs/latest/)
+
+- StackOverflow
+
+## End

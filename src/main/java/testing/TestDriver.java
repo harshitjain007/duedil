@@ -34,7 +34,7 @@ public class TestDriver {
                 System.out.println(f.getName());
                 byte[] testContent = Files.readAllBytes(Paths.get(f.getAbsolutePath()));
                 byte[] baseContent = Files.readAllBytes(Paths.get(new File(basePath).getAbsolutePath()));
-                return Arrays.equals(baseContent,testContent);
+                return Arrays.equals(baseContent, testContent);
             }
         }
         return false;

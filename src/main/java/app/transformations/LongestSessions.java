@@ -18,6 +18,10 @@ import java.util.List;
 public class LongestSessions {
 
     private static FlatMapFunction<Row,Row> sessionCreator = new FlatMapFunction<Row, Row>(){
+        private Row createRow(String uid, Timestamp t1, Timestamp t2, StringBuilder songs){
+            return RowFactory.create(uid, t1, t2, t2.getTime()-t1.getTime(), songs.substring(0, songs.length()-1));
+        }
+
         @Override
         public Iterator<Row> call(Row row) throws Exception {
             // fetch the fields
@@ -26,12 +30,7 @@ public class LongestSessions {
 
             // sort the tuple list according to the timestamp
             ArrayList<Row> songList = new ArrayList<>(list);
-            songList.sort(new Comparator<Row>() {
-                @Override
-                public int compare(Row o1, Row o2) {
-                    return o1.getTimestamp(0).compareTo(o2.getTimestamp(0));
-                }
-            });
+            songList.sort(Comparator.comparing(o -> o.getTimestamp(0)));
 
             // create sessions
             Row first = songList.get(0);
@@ -58,18 +57,11 @@ public class LongestSessions {
 
             return sessions.iterator();
         }
-
-        private Row createRow(String uid, Timestamp t1, Timestamp t2, StringBuilder songs){
-            return RowFactory.create(uid, t1, t2, t2.getTime()-t1.getTime(), songs.substring(0, songs.length()-1));
-        }
     };
 
-    private static MapFunction<Row,Row> strToList = new MapFunction<Row, Row>() {
-        @Override
-        public Row call(Row row) throws Exception {
-            String[] songs = row.getString(4).split("\t");
-            return RowFactory.create(row.getString(0),row.getTimestamp(1),row.getTimestamp(2), songs);
-        }
+    private static MapFunction<Row,Row> strToList = (MapFunction<Row, Row>) row -> {
+        String[] songs = row.getString(4).split("\t");
+        return RowFactory.create(row.getString(0),row.getTimestamp(1),row.getTimestamp(2), songs);
     };
 
     public static Dataset<Row> transform(Dataset<Row> dataset, int n){

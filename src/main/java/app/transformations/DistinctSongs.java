@@ -10,6 +10,5 @@ public class DistinctSongs {
         return dataset.groupBy(dataset.col("user_id"))
                 .agg(functions.countDistinct(dataset.col("track_name")))
                 .orderBy(dataset.col("user_id"));
-
     }
 }
