@@ -1,0 +1,5 @@
+.idea/*
+target/*
+derby.log
+MusicInsights.iml
+metastore_db/*

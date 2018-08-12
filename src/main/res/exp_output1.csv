@@ -1,0 +1,6 @@
+user_id,count(DISTINCT track_name)
+user_001000,4
+user_001001,3
+user_001002,5
+user_001003,2
+user_001004,3
