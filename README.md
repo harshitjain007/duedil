@@ -19,11 +19,11 @@ Goto the directory containing pom.xml and run the following command-
 ## Run instructions
 Run the following command to start program execution-
 
-`spark-submit --class "app.Driver" --master local[4] path/to/input path/to/output1 path/to/output2 path/to/output3`
+`spark-submit --class "app.Driver" --master local[4] path/to/jar path/to/input path/to/output1 path/to/output2 path/to/output3`
 
 Test data is present in the resource directory under src/main. Run the following command to run unit tests - 
  
- `spark-submit --class "testing.TestDriver" --master local[4] path/to/test_input path/to/expected_output1 path/to/expected_output2 path/to/expected_output3`
+ `spark-submit --class "testing.TestDriver" --master local[4] path/to/jar path/to/test_input path/to/expected_output1 path/to/expected_output2 path/to/expected_output3`
  
 ## Authors
  Harshit Jain
